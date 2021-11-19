@@ -1,0 +1,6 @@
+version: "3"
+services:
+  web:
+    image: ubuntu
+    command: echo "Hello World from ubuntu container!"
+
