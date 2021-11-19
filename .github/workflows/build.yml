@@ -44,5 +44,16 @@ jobs:
           echo `pwd`
           docker-compose -f ./GithubActionsDemo/docker-compose.yml -p testing up
           echo ---Containers up--
-
+      - name: Notify slack
+        env:
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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" #${{ secrets.SLACK_WEBHOOK_URL }}
+        uses: edge/simple-slack-notify@master
+        with:
+          channel: '#'
+          status: ${{ job.status }}
+          success_text: Build completed successfully
+          failure_text: 'Build failed'
+          cancelled_text: 'Build was cancelled'
+          fields: |
+            [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true }, { "title": "Branch", "value": "${env.BRANCH}", "short": true }, { "title": "Action URL", "value": "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}"}]
 
