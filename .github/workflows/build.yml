@@ -38,3 +38,20 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - name: Build docker
+        run: |
+          echo ---Building and starting up docker---
+          echo `pwd`
+          docker-compose -f ./GithubActionsDemo/docker-compose.yml -p testing up
+          echo ---Secret Webhook URL--
+          echo ${{ secrets.SLACK_WEBHOOK_URL }}
+          echo ---Containers up--
+      - name: Notify slack
+        env:
+          SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}
+        uses: edge/simple-slack-notify@master
+        with:
+          channel: '#'
+          text: 'Github CI connecting to Slack'
+
+
