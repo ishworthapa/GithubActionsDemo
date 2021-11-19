@@ -42,6 +42,7 @@ jobs:
         run: |
           echo ---Building and starting up docker---
           echo `pwd`
+          ls -l .
           docker-compose -f ./GithubActionsDemo/docker-compose.yml -p testing up
           echo ---Containers up--
       - name: Notify slack
