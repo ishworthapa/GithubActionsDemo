@@ -41,8 +41,8 @@ jobs:
       - name: Build docker
         run: |
           echo ---Building and starting up docker---
-          echo `pwd`
-          ls -l .
+          ls -l GithubActionsDemo
+          ls -l ././GithubActionsDemo/docker-compose.yml
           docker-compose -f ./GithubActionsDemo/docker-compose.yml -p testing up
           echo ---Containers up--
       - name: Notify slack
